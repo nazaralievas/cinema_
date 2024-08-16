@@ -1,5 +1,15 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-    <h1>Главная страница</h1>
+
+    <div class="row">
+        {% for movie in movies %}
+            <div class="col-lg-4">
+                <h4><a href="#">{{ movie.name }}</a></h4>
+                <h6>Жанр: {{ movie.genre }}</h6>
+                <a href="#"><img src="{{ movie.poster }}"></a>
+            </div>
+        {% endfor %}
+    </div>
+
 {% endblock %}
