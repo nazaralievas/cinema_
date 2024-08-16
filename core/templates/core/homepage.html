@@ -5,9 +5,9 @@
     <div class="row">
         {% for movie in movies %}
             <div class="col-lg-4">
-                <h4><a href="#">{{ movie.name }}</a></h4>
+                <h4><a href="/movie_detail/{{ movie.id }}">{{ movie.name }}</a></h4>
                 <h6>Жанр: {{ movie.genre }}</h6>
-                <a href="#"><img src="{{ movie.poster }}"></a>
+                <a href="/movie_detail/{{ movie.id }}"><img src="{{ movie.poster }}"></a>
             </div>
         {% endfor %}
     </div>

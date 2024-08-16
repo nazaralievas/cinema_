@@ -1,10 +1,11 @@
 {% extends 'core/base.html' %}
-
 {% block content %}
 
-{{ movie.name }}
-{{ movie.genre }}
-{{ movie.poster }}
-{{ movie.description }}
+<ul>
+    <li><h3>{{ movie.name }}</h3></li>
+    <li>Жанр: {{ movie.genre }}</li>
+    <li><img src="{{ movie.poster }}"></li>
+    <li>{{ movie.description }}</li>
+</ul>
 
 {% endblock %}
