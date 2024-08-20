@@ -8,4 +8,25 @@
     <li>{{ movie.description }}</li>
 </ul>
 
+{% if user.is_authenticated %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+{% else %}
+    <h3><a href="#">Зарегистрируйтесь</a>, чтобы оставить отзыв</h3>
+{% endif %}
+
+<h4>----------Отзывы----------</h4>
+<ul>
+    {% for review in reviews %}
+        <li>
+            <strong>{{ review.user }}</strong>
+            <p>{{ review.comment }}</p>
+            <h5>{{ review.date_created }}</h5>
+        </li>
+    {% endfor %}
+</ul>
+
 {% endblock %}
