@@ -48,7 +48,7 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('homepage')
+            return redirect('login')
         context['form'] = form
     else:
         context['form'] = RegistrationForm()
@@ -57,23 +57,27 @@ def register(request):
 
 
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login
+from django.contrib import auth
 def login(request):
-    context = {}
-    if request.method == 'POST':
-        form = AuthenticationForm(request, request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('homepage')
-        context['form'] = form
+    if not request.user.is_authenticated:
+        context = {}
+        if request.method == 'POST':
+            form = AuthenticationForm(request, request.POST)
+            if form.is_valid():
+                user = form.get_user()
+                auth.login(request, user)
+                return redirect('homepage')
+            context['form'] = form
+        else:
+            context['form'] = AuthenticationForm()
     else:
-        context['form'] = AuthenticationForm()
+        return redirect('homepage')
     
     return render(request, 'core/login.html', context)
 
 
-from django.contrib.auth import logout
+# from django.contrib.auth import logout
+from django.contrib import auth
 def logout(request):
-    logout(request)
+    auth.logout(request)
     return redirect('homepage')
